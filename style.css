@@ -2247,10 +2247,14 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   }
   .exp-tabs::-webkit-scrollbar { display: none; }
   .exp-tab {
-    flex: 0 0 160px;
+    flex: 0 0 168px;
     scroll-snap-align: start;
   }
-  .exp-tab-logo { display: none; }
+  /* 窄屏保留公司 logo，按比例缩小以容纳「福田康明斯 + logo」 */
+  .exp-tab-main { gap: 6px; }
+  .exp-tab-logo-iat { width: 42px; }
+  .exp-tab-logo-kms { width: 56px; }
+  .exp-tab-logo-chery { width: 40px; }
   .skill-tab,
   .pub-tab {
     flex: 1 1 0;
@@ -2274,7 +2278,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .hero-name { font-size: 27px; }
   .hero-stats { grid-template-columns: 1fr; }
   .exp { padding: 18px 15px 20px; }
-  .exp-tab { flex-basis: 148px; padding: 8px 10px; }
+  .exp-tab { flex-basis: 156px; padding: 8px 10px; }
   .skill-tab { padding: 8px 8px; }
   .pub-tab { padding: 8px 8px; }
   .section h2 { font-size: 19px; gap: 8px; }
