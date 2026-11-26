@@ -15,7 +15,7 @@
    09 表格
    10 架构图
    11 技能 / 标签
-   12 论文 / 荣誉 / 教育 / 页脚
+   12 文献卡片 / 荣誉 / 教育 / 页脚
    13 动效 / 可访问性
    14 响应式
    15 打印
@@ -332,6 +332,7 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   font-size: 10.5px;
   font-weight: 400;
   letter-spacing: .04em;
+  text-wrap: balance;
   color: var(--text-3);
 }
 
@@ -364,6 +365,110 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   line-height: 1.5;
   color: var(--text-4);
 }
+
+/* 侧栏技能熟练度：复用 .meter 五段进度条 */
+.side-bio.side-skill li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 0;
+  text-align: left;
+  border-bottom: 1px dashed var(--border);
+}
+.side-bio.side-skill li:last-child { border-bottom: 0; }
+.side-bio.side-skill li::before { display: none; }
+.side-skill-name { font-size: 12px; color: var(--text-2); }
+
+/* 侧栏分区块与小标题 */
+.side-block { margin: 0 0 16px; text-align: left; }
+.side-block:last-child { margin-bottom: 0; }
+
+/* 侧栏区块标题：主题色竖条 + 加粗 + 细底线，英文靠右大写 */
+.side-h {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 0 0 6px 9px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.3;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+}
+.side-h::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 1.3em;             /* 与 line-height 一致，竖条刚好覆盖标题文字行 */
+  border-radius: 2px;
+  background: var(--accent);
+}
+.side-h .en {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;  /* Contact → CONTACT */
+  color: var(--text-4);
+}
+
+/* 联系方式：两列排布（CV + GitHub 一行、微信 + 抖音 一行、邮箱整行） */
+.side-contact .social-icons {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 10px;
+  padding-top: 0;
+  border-top: 0;
+}
+.side-contact .social-icons li { align-items: center; gap: 8px; }
+.side-contact .social-icons .ico { width: 26px; height: 26px; padding: 6px; }
+.side-contact .social-icons li:last-child { grid-column: 1 / -1; }
+.side-contact .social-icons a { white-space: nowrap; }
+.side-block .side-bio { margin: 0; }
+
+/* 能力标签 */
+.side-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.side-tag-list li {
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+/* 获奖荣誉 */
+.side-awards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.side-awards li {
+  display: grid;
+  gap: 2px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.side-awards li:last-child { border-bottom: 0; }
+.sa-year { font-family: var(--mono); font-size: 10px; color: var(--text-4); }
+.sa-main { color: var(--text-2); }
 
 /* 图标链接：方形浅底按钮 */
 .social-icons {
@@ -425,8 +530,9 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   font-size: 12.5px;
   line-height: 1.6;
   color: var(--text-3);
-  text-align: left;
+  text-align: center;
 }
+.side-meta li { text-wrap: balance; }
 
 /* 二维码弹层（微信 / 抖音共用） */
 .qr-modal {
@@ -493,6 +599,21 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   height: auto;
   min-height: 160px;
   background: var(--bg-tint);
+}
+
+/* 图片模式：奖杯等透明大图按视口高度缩放 */
+.qr-modal.is-photo {
+  width: auto;
+  max-width: min(94vw, 900px);
+}
+.qr-modal.is-photo .qr-image {
+  width: auto;
+  max-width: 100%;
+  max-height: 72vh;
+  margin: 0 auto;
+  padding: 12px 14px 16px;
+  background: none;
+  object-fit: contain;
 }
 
 /* ============================================================
@@ -859,6 +980,25 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 
 .exp-head { margin-bottom: 12px; }
 
+/* 公司名 + 职位徽标同一排，放不下时徽标整块换行 */
+.exp-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+}
+.exp-title-row .exp-org {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.exp-title-row .exp-role { margin: 0; }
+/* 英文对照单独占满一行，避免撑宽标题行把徽标推远 */
+.exp-title-en {
+  flex: 1 1 100%;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
 .exp-org {
   margin: 0;
   font-size: 17px;
@@ -1096,12 +1236,6 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 .hero-award svg { width: 17px; height: 17px; flex: none; fill: currentColor; }
 .hero-award strong { font-weight: 700; }
 
-.awards li.is-highlight {
-  border-color: var(--accent-line);
-  background: linear-gradient(90deg, var(--accent-soft), var(--surface) 70%);
-}
-.awards li.is-highlight::before { background: var(--accent); }
-
 .section > p.exp-span {
   margin: 14px 0 0;
   font-size: 13px;
@@ -1175,6 +1309,26 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   box-shadow: inset 0 -2px 0 var(--accent);
   color: var(--accent-strong);
 }
+/* 选项卡内的小 logo（与正文 logo 同一套主题反色逻辑） */
+.exp-tab-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.exp-tab-logo {
+  flex: none;
+  height: auto;
+  opacity: .9;
+  user-select: none;
+}
+.exp-tab-logo-iat { width: 51px; }
+.exp-tab-logo-chery { width: 48px; }
+.exp-tab-logo-kms { width: 70px; opacity: .85; filter: invert(1); }
+:root[data-theme="dark"] .exp-tab-logo-iat,
+:root[data-theme="dark"] .exp-tab-logo-chery { filter: brightness(0) invert(1); }
+:root[data-theme="dark"] .exp-tab-logo-kms { filter: none; }
+
 .exp-tab-name,
 .skill-tab-name,
 .pub-tab-name {
@@ -1283,6 +1437,28 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   color: var(--text);
   border-left: 2px solid transparent;
   transition: border-left-color .18s var(--ease);
+}
+
+/* 表格首列序号（专利表 01–13） */
+.t-no {
+  display: inline-block;
+  min-width: 2em;
+  margin-right: .35em;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 专利名外链：文字保持正文色，下划线用中性灰，悬停转强调色 */
+.table tbody th.t-key a {
+  color: inherit;
+  text-decoration-color: var(--text-3);
+}
+.table tbody th.t-key a:hover {
+  color: var(--accent-strong);
+  text-decoration-color: var(--accent-strong);
 }
 
 .table tbody td { color: var(--text-2); }
@@ -1518,32 +1694,61 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 }
 
 /* ============================================================
-   12 论文 / 荣誉 / 教育 / 页脚
+   12 文献卡片 / 荣誉 / 教育 / 页脚
    ============================================================ */
-.pub-list {
+.pub-note {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+.pub-cards {
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
+  list-style: none;
   display: grid;
-  gap: 12px;
-  font-size: 14.5px;
-  color: var(--text-2);
+  gap: 8px;
 }
-.pub-list li::marker {
-  color: var(--accent-strong);
+.pub-cards li {
+  display: grid;
+  grid-template-columns: 2.2em minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.pub-cards li:hover {
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-sm);
+}
+.pub-num {
+  padding-top: 2px;
   font-family: var(--mono);
+  font-size: 11px;
   font-weight: 700;
+  line-height: 1.55;
+  color: var(--accent-strong);
+  font-variant-numeric: tabular-nums;
 }
-.pub-list-title {
-  display: block;
+.pub-main {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+.pub-title {
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.55;
   color: var(--text);
 }
-a.pub-list-title {
+a.pub-title {
   text-decoration: none;
   transition: color .18s var(--ease);
 }
-a.pub-list-title:hover {
+a.pub-title:hover {
   color: var(--accent-strong);
   text-decoration: underline;
   text-decoration-color: var(--accent-line);
@@ -1558,62 +1763,43 @@ a.pub-list-title:hover {
   opacity: .5;
   transition: opacity .18s var(--ease);
 }
-a.pub-list-title:hover .pub-link-icon,
-a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
-.pub-list-meta {
-  display: block;
-  margin-top: 2px;
+a.pub-title:hover .pub-link-icon,
+a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
+.pub-sub,
+.pub-src {
   font-size: 12.5px;
+  line-height: 1.5;
   color: var(--text-3);
 }
-
-/* 专利：署名列保持单行 */
-.table td[data-label="署名"] { white-space: nowrap; }
-
-/* 经验报告网格 */
-.report-grid {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-.report-grid li {
+.pub-meta {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding: 12px 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-top: 1px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.pub-tag {
+  padding: 1px 8px;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 999px;
   background: var(--surface);
-  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
-}
-.report-grid li:hover {
-  border-color: var(--accent-line);
-  box-shadow: var(--shadow-sm);
-}
-.report-no {
-  flex: none;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-strong);
-  font-variant-numeric: tabular-nums;
-}
-.report-name {
-  flex: 1;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text);
-}
-.report-date {
-  flex: none;
-  font-family: var(--mono);
   font-size: 11.5px;
-  color: var(--text-4);
-  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+  color: var(--text-2);
+  white-space: nowrap;
 }
+.pub-tag.is-granted {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+.pub-when,
+.pub-who { white-space: nowrap; }
 
 .awards {
   margin: 0;
@@ -1648,6 +1834,52 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   box-shadow: var(--shadow-sm);
 }
 .awards li:hover::before { background: var(--accent-strong); }
+
+/* A1：文字左、奖杯方形缩略图右 */
+.awards li.award-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+}
+.award-body { min-width: 0; }
+.award-thumb {
+  display: block;
+  height: 104px;               /* 透明竖版奖杯，宽度按图比例约 39px */
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  cursor: zoom-in;
+}
+.award-thumb img {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: drop-shadow(0 6px 10px rgba(15, 23, 42, .16));
+  transition: transform .18s var(--ease);
+}
+.award-thumb:hover img { transform: translateY(-2px); }
+.award-thumb:focus-visible {
+  outline: 2px solid var(--accent-line);
+  outline-offset: 4px;
+}
+
+/* 横版缩略图（项目路线图）：文档预览式细边，不做上浮 */
+.award-thumb--wide {
+  width: 176px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.award-thumb--wide img {
+  width: 100%;
+  height: auto;
+  filter: none;
+}
+.award-thumb--wide:hover { border-color: var(--accent-line); }
+.award-thumb--wide:hover img { transform: none; }
 
 .awards strong { color: var(--text); }
 .awards strong:first-of-type {
@@ -1821,11 +2053,13 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .side-bio li { padding: 2px 0 2px 12px; }
   .side-bio li::before { top: 9px; }
   .social-icons { padding-top: 14px; gap: 4px; }
+  /* 高度吃紧时先收能力标签，保留联系方式与专业技能 */
+  .side-tags { display: none; }
 }
 
-/* 超矮屏：能力标签与主区「核心优势」重复，优先保留元信息与联系方式 */
+/* 超矮屏：专业技能与能力标签和主区重复，只留联系方式与获奖荣誉 */
 @media (min-width: 901px) and (max-height: 780px) {
-  .side-bio { display: none; }
+  .side-skills, .side-tags { display: none; }
 }
 
 @media (max-width: 1140px) {
@@ -1868,16 +2102,20 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .avatar::after { inset: 26px; }
   .side-name { font-size: 18px; }
   .side-role { margin-bottom: 14px; }
-  /* 小屏：能力标签与主区“核心优势”重复，省略；元信息与 CTA 保留 */
-  .side-bio { display: none; }
+  /* 小屏：专业技能 / 能力标签 / 获奖荣誉与主区重复，省略；只留联系方式 */
+  .side-skills, .side-tags, .side-honors { display: none; }
   .side-meta {
     max-width: 420px;
     margin: 0 auto 16px;
   }
-  .social-icons {
+  .side-contact {
     max-width: 360px;
     margin: 0 auto;
-    padding-top: 16px;
+  }
+  .side-contact .social-icons {
+    max-width: none;
+    margin: 0;
+    padding-top: 0;
   }
 
   .content { padding: 28px 22px 52px; max-width: none; }
@@ -1900,10 +2138,19 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
 }
 
 @media (max-width: 760px) {
-  .report-grid { grid-template-columns: 1fr; }
+  .pub-cards li {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 6px 10px;
+  }
+  .pub-meta {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
 
   .edu-wrap { flex-direction: column-reverse; gap: 12px; }
   .edu-logo { width: 168px; opacity: .8; }
+
+  .exp-title-row { gap: 4px 10px; }
 
   /* 表格堆叠成卡片 */
   .table-stack thead {
@@ -2003,6 +2250,7 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
     flex: 0 0 160px;
     scroll-snap-align: start;
   }
+  .exp-tab-logo { display: none; }
   .skill-tab,
   .pub-tab {
     flex: 1 1 0;
@@ -2013,6 +2261,10 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .pub-tab-name { font-size: 13px; }
 
   .awards li { padding: 12px 14px 12px 16px; }
+
+  /* A2 横版缩略图：窄屏改为上下排，避免挤压文字 */
+  .awards li.award-media--wide { grid-template-columns: minmax(0, 1fr); }
+  .award-thumb--wide { justify-self: start; width: min(100%, 260px); }
 }
 
 @media (max-width: 520px) {
@@ -2027,6 +2279,7 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .pub-tab { padding: 8px 8px; }
   .section h2 { font-size: 19px; gap: 8px; }
   .h2-en { font-size: 11px; }
+  .award-thumb:not(.award-thumb--wide) { height: 80px; }
 }
 
 /* ============================================================
@@ -2064,7 +2317,7 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .theme-toggle { display: none !important; }
 
   body { font-size: 10.5pt; line-height: 1.55; }
-  a { color: #000; text-decoration: underline; }
+  a { color: #000; text-decoration: underline; text-decoration-color: currentColor; }
 
   .layout { display: block; max-width: none; min-height: 0; }
 
@@ -2079,7 +2332,13 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   }
   .avatar, .side-role .en, .social-icons .ico { display: none; }
   .side-bio { margin-bottom: 8px; }
+  /* 能力标签与获奖荣誉在正文已有，打印时省略 */
+  .side-tags, .side-honors { display: none; }
   .side-bio .en { color: #333; }
+  /* 侧栏区块标题转黑白，避免彩色竖条与过浅的分隔线 */
+  .side-h { color: #000; border-bottom-color: #999; }
+  .side-h::before { background: #000; }
+  .side-h .en { color: #333; }
 
   .content { padding: 0; max-width: none; }
   .js .reveal { opacity: 1 !important; transform: none !important; }
@@ -2175,12 +2434,12 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
     background: none;
   }
   .award-callout svg { fill: #000; }
-  .awards li.is-highlight { background: none; }
 
   .table-wrap { margin-bottom: 10px; border: 0; border-radius: 0; overflow: visible; }
   .table thead th { background: #eee !important; color: #000; border-bottom: 1px solid #999; }
   .table th, .table td { padding: 5px 8px; color: #000; }
   .table tbody tr:hover { background: none; }
+  .table tbody th.t-key a { text-decoration-color: #000; }
   .table caption { padding: 4px 0; background: none; color: #333; }
   .t-good { color: #000; }
 
@@ -2195,11 +2454,14 @@ a.pub-list-title:focus-visible .pub-link-icon { opacity: 1; }
   .tags li { border-color: #999; background: none; }
   .awards li { padding: 0 0 6px; border: 0; border-radius: 0; }
   .awards li::before { display: none; }
+  /* 纸质简历不印奖杯照片 */
+  .awards li.award-media { display: block; }
+  .awards li.award-media .award-thumb { display: none; }
   .award-date { background: none; padding: 0; }
   .edu em { background: none; padding: 0; }
 
   .footer { margin-top: 14px; }
 
-  .exp, .table-wrap, .flow, .awards li, .pub-list li,
+  .exp, .table-wrap, .flow, .awards li, .pub-cards li,
   .skill-list li, .tag-group, .proj-meta, .award-callout, .bridge { page-break-inside: avoid; }
 }
