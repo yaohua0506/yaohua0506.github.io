@@ -13,6 +13,22 @@
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ccircle cx='32' cy='24' r='9' fill='white'/%3E%3Cpath d='M14 56c0-10 8-16 18-16s18 6 18 16z' fill='white'/%3E%3C/svg%3E" />
 
+<meta name="color-scheme" content="light dark" />
+
+<script>
+  /* 首屏渲染前确定主题，避免暗色用户看到白闪 */
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var dark = saved ? saved === 'dark'
+                       : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -24,12 +40,22 @@
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <nav class="masthead-nav">
     <a href="#about">概览<span class="nav-en">Overview</span></a>
+    <a href="#education">教育<span class="nav-en">Education</span></a>
     <a href="#experience">经历<span class="nav-en">Experience</span></a>
     <a href="#skills">技能<span class="nav-en">Skills</span></a>
     <a href="#publications">成果<span class="nav-en">Publications</span></a>
     <a href="#honors">荣誉<span class="nav-en">Honors</span></a>
-    <a href="#education">教育<span class="nav-en">Education</span></a>
     <a href="Resume.pdf" target="_blank" rel="noopener">CV</a>
+    <button class="theme-toggle" id="themeToggle" type="button"
+            aria-pressed="false" aria-label="切换到深色主题" title="切换到深色主题">
+      <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5a8.5 8.5 0 1 0 10.8 10.8Z"/>
+      </svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+    </button>
   </nav>
 </header>
 
@@ -42,6 +68,11 @@
       <p class="side-name">hhh</p>
       <p class="side-role">AI Agent 工程师 · 汽车动力系统<span class="en">AI Agent Engineer · Automotive Powertrain</span></p>
 
+      <ul class="side-meta">
+        <li>北京 · 20 年汽车工程 / 2 年 AI Agent</li>
+        <li>现任 阿尔特（北京）· 动力经济性高级工程师</li>
+      </ul>
+
       <ul class="side-bio">
         <li>多智能体架构设计<span class="en">Multi-Agent Architecture</span></li>
         <li>MCP 协议与工具封装<span class="en">MCP Protocol &amp; Tooling</span></li>
@@ -51,11 +82,20 @@
 
       <ul class="social-icons">
         <li>
-          <svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z"/></svg>
-          <div class="li-body">
-            <a href="https://www.hitwh.edu.cn/" target="_blank" rel="noopener">哈尔滨工业大学 · 汽车工程学院</a>
-            <span class="en">Harbin Institute of Technology · School of Automotive Engineering</span>
-          </div>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Z"/></svg>
+          <a href="Resume.pdf" target="_blank" rel="noopener">下载 CV<span class="en">Download Resume (PDF)</span></a>
+        </li>
+        <li>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 3.8C5.7 3.8 2.7 6.2 2.7 9.2c0 1.7 1 3.2 2.5 4.2l-.7 2.1 2.4-1.2c.5.1 1.1.2 1.6.2h.5a5.4 5.4 0 0 1-.2-1.5c0-2.9 2.8-5.2 6.2-5.2h.4c-.7-2.3-3.2-4-6-4Zm-2.2 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm4.6 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm4.8 2.3c-3 0-5.5 2-5.5 4.5s2.5 4.5 5.5 4.5c.5 0 1-.1 1.5-.2l2 .9-.5-1.7c1.2-.8 2-2 2-3.5 0-2.5-2.5-4.5-5.5-4.5Zm-2 2.5a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7Zm4 0a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7Z"/></svg>
+          <a href="img/wechat-qr.png" target="_blank" rel="noopener"
+             data-qr="img/wechat-qr.png" data-title="微信扫码添加"
+             data-alt="微信二维码，扫码添加好友">微信<span class="en">WeChat · 扫码添加</span></a>
+        </li>
+        <li>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          <a href="img/douyin-qr.png" target="_blank" rel="noopener"
+             data-qr="img/douyin-qr.png" data-title="抖音扫码关注"
+             data-alt="抖音二维码，扫码关注">抖音<span class="en">Douyin · 扫码关注</span></a>
         </li>
         <li>
           <svg class="ico" viewBox="0 0 512 512" aria-hidden="true"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg>
@@ -86,7 +126,7 @@
         <ul class="hero-stats">
           <li><strong>20</strong><span>年汽车动力系统工程</span></li>
           <li><strong>2</strong><span>年 AI Agent 开发实战</span></li>
-          <li><strong>5</strong><span>项发明专利（第 1 发明人）</span></li>
+          <li><strong>9</strong><span>项专利（发明专利 + 实用新型）</span></li>
           <li><strong>1</strong><span>项 AI 大赛二等奖（洞察奖）</span></li>
         </ul>
 
@@ -135,6 +175,21 @@
         <li>工程化思维 → 从仿真平台到 Agent 系统的完整技术迁移</li>
         <li>可观测性设计 → OpenTelemetry 链路追踪 + 三层评估体系</li>
       </ul>
+    </section>
+
+    <section class="section" id="education">
+      <h2>教育背景 <span class="h2-en">Education</span></h2>
+      <div class="edu-wrap">
+        <ul class="edu">
+          <li>
+            <span class="edu-row"><em>2002.09 - 2006.07</em><span class="edu-school">哈尔滨工业大学</span></span>
+            <span class="edu-row">机械设计制造及其自动化，本科 · 工学学士。</span>
+            <span class="en">Sep 2002 – Jul 2006 · Harbin Institute of Technology · Mechanical Design, Manufacturing and Automation · B.Eng.</span>
+            <span class="en">相关课程：自动控制原理、机械系统设计、计算机编程基础</span>
+          </li>
+        </ul>
+        <img class="edu-logo" src="img/HIT-dark.png" alt="哈尔滨工业大学校徽与校名" width="220" height="51" decoding="async" />
+      </div>
     </section>
 
     <section class="section" id="experience">
@@ -906,62 +961,190 @@
     </section>
 
     <section class="section" id="publications">
-      <h2>专利与论文 <span class="h2-en">Patents &amp; Publications</span></h2>
+      <h2>专利 · 论文 · 经验报告 <span class="h2-en">Patents · Papers · Reports</span></h2>
 
-      <h3 class="sub-h">发明专利（第 1 发明人，精选 5 项）<span class="h2-en">Invention Patents</span></h3>
-      <div class="table-wrap">
-        <table class="table table-stack">
-          <thead>
-            <tr><th scope="col">名称</th><th scope="col">时间</th><th scope="col">状态</th><th scope="col">相关性</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="t-key">商用车轮胎压力智能调节节油系统</th>
-              <td data-label="时间">2024.12</td>
-              <td data-label="状态">已授权</td>
-              <td data-label="相关性"><span class="meter meter-sm" role="img" aria-label="相关性 5 分，满分 5 分" data-v="5"><i></i><i></i><i></i><i></i><i></i></span> 智能控制</td>
-            </tr>
-            <tr>
-              <th scope="row" class="t-key">融合 CAN 总线和卫星定位系统修正车速的方法及系统</th>
-              <td data-label="时间">2025.02</td>
-              <td data-label="状态">已授权</td>
-              <td data-label="相关性"><span class="meter meter-sm" role="img" aria-label="相关性 5 分，满分 5 分" data-v="5"><i></i><i></i><i></i><i></i><i></i></span> 数据融合</td>
-            </tr>
-            <tr>
-              <th scope="row" class="t-key">基于公路设计规范的车辆道路坡度适应性评价方法</th>
-              <td data-label="时间">2025.02</td>
-              <td data-label="状态">已授权</td>
-              <td data-label="相关性"><span class="meter meter-sm" role="img" aria-label="相关性 4 分，满分 5 分" data-v="4"><i></i><i></i><i></i><i></i><i></i></span> 算法优化</td>
-            </tr>
-            <tr>
-              <th scope="row" class="t-key">基于动态预处理与多模式平滑的道路坡度数据处理方法及系统</th>
-              <td data-label="时间">2025.03</td>
-              <td data-label="状态">已授权</td>
-              <td data-label="相关性"><span class="meter meter-sm" role="img" aria-label="相关性 5 分，满分 5 分" data-v="5"><i></i><i></i><i></i><i></i><i></i></span> 数据处理</td>
-            </tr>
-            <tr>
-              <th scope="row" class="t-key">一种连续可变气门升程装置及其控制方法</th>
-              <td data-label="时间">2009.06</td>
-              <td data-label="状态">已授权</td>
-              <td data-label="相关性"><span class="meter meter-sm" role="img" aria-label="相关性 3 分，满分 5 分" data-v="3"><i></i><i></i><i></i><i></i><i></i></span> 控制技术</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="pub-tabs-wrap">
+        <div class="pub-tabs" role="tablist" aria-label="专利、论文与经验报告">
+          <button type="button" class="pub-tab" role="tab" id="pub-tab-patents"
+                  aria-selected="true" aria-controls="patents">
+            <span class="pub-tab-name">专利</span>
+            <span class="pub-tab-meta">9 项</span>
+          </button>
+          <button type="button" class="pub-tab" role="tab" id="pub-tab-papers"
+                  aria-selected="false" aria-controls="papers" tabindex="-1">
+            <span class="pub-tab-name">论文</span>
+            <span class="pub-tab-meta">3 篇</span>
+          </button>
+          <button type="button" class="pub-tab" role="tab" id="pub-tab-reports"
+                  aria-selected="false" aria-controls="reports" tabindex="-1">
+            <span class="pub-tab-name">经验报告</span>
+            <span class="pub-tab-meta">12 篇</span>
+          </button>
+        </div>
       </div>
 
-      <h3 class="sub-h">学术论文（第 1 作者）<span class="h2-en">Papers</span></h3>
-      <ol class="pub-list">
-        <li>
-          <span class="pub-list-title">基于 Cruise 与 Simulink 的插电式并联混合动力汽车性能仿真研究</span>
-          <span class="en">Performance Simulation of a Plug-in Parallel Hybrid Electric Vehicle Based on Cruise and Simulink</span>
-          <span class="pub-list-meta">2011 年 AVL 用户大会论文集</span>
-        </li>
-        <li>
-          <span class="pub-list-title">基于 Cruise 软件的重型商用车循环工况法燃油消耗仿真</span>
-          <span class="en">Fuel Consumption Simulation of Heavy Commercial Vehicles under Driving Cycles Using Cruise</span>
-          <span class="pub-list-meta">内燃机科技 2014</span>
-        </li>
-      </ol>
+      <div class="pub-panel" id="patents" role="tabpanel" aria-labelledby="pub-tab-patents" tabindex="0">
+        <h3 class="sub-h">专利（9 项，含实用新型）<span class="h2-en">Patents</span></h3>
+        <div class="table-wrap">
+          <table class="table table-stack">
+            <thead>
+              <tr><th scope="col">名称</th><th scope="col">类型 / 状态</th><th scope="col">时间</th><th scope="col">署名</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="t-key">基于动态预处理与多模式平滑的道路坡度数据处理方法及系统</th>
+                <td data-label="类型 / 状态">发明专利</td>
+                <td data-label="时间">2025.03</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">基于公路设计规范的车辆道路坡度适应性评价方法</th>
+                <td data-label="类型 / 状态">发明专利</td>
+                <td data-label="时间">2025.02</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">融合 CAN 总线和卫星定位系统修正车速的方法及系统</th>
+                <td data-label="类型 / 状态">发明专利</td>
+                <td data-label="时间">2025.02</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">商用车轮胎压力智能调节节油系统</th>
+                <td data-label="类型 / 状态">发明专利</td>
+                <td data-label="时间">2024.12</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">一种基于车辆性能需求的发动机扭矩特性生成方法及系统</th>
+                <td data-label="类型 / 状态">发明专利（国家专利局已受理）</td>
+                <td data-label="时间">2016.11</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">一种车辆参数标定设备和方法</th>
+                <td data-label="类型 / 状态">发明专利（公布阶段）</td>
+                <td data-label="时间">2015.10</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">一种带冷却作用的传动轴</th>
+                <td data-label="类型 / 状态">实用新型专利（已授权）</td>
+                <td data-label="时间">2010.12</td>
+                <td data-label="署名">第 2 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">一种发动机装饰罩</th>
+                <td data-label="类型 / 状态">实用新型专利（已授权）</td>
+                <td data-label="时间">2010.11</td>
+                <td data-label="署名">第 2 发明人</td>
+              </tr>
+              <tr>
+                <th scope="row" class="t-key">一种连续可变气门升程装置及其控制方法</th>
+                <td data-label="类型 / 状态">发明专利（已授权）</td>
+                <td data-label="时间">2009.06</td>
+                <td data-label="署名">第 1 发明人</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pub-panel" id="papers" role="tabpanel" aria-labelledby="pub-tab-papers" tabindex="0">
+        <h3 class="sub-h">学术论文（3 篇）<span class="h2-en">Papers</span></h3>
+        <ol class="pub-list">
+          <li>
+            <a class="pub-list-title"
+               href="https://kns.cnki.net/kcms2/article/abstract?v=HN3WE68mkPqRCLqyUhGxPqj8wmMzsN80HsFJQcVppuD8r6a2bVd5lFOZ5GnAKhMlATN8kLkOYCWf9mqQSErd1w2PVWbellUGVVwNSxBuEZrIaj5qo1ifB30PaAs9ozKg2T_U28ff9DRQVC9jMicVSAk9ejklTgis&uniplatform=NZKPT"
+               target="_blank" rel="noopener noreferrer">基于 Cruise 与 Simulink 的插电式并联混合动力汽车性能仿真研究<svg class="pub-link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3Z"/><path d="M5 5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6H5V5Z"/></svg></a>
+            <span class="en">Performance Simulation of a Plug-in Parallel Hybrid Electric Vehicle Based on Cruise and Simulink</span>
+            <span class="pub-list-meta">芜湖职业技术学院学报 2012, 14(3): 28-31 · 第 1 作者<span class="sr-only">（在新窗口打开原文）</span></span>
+          </li>
+          <li>
+            <a class="pub-list-title"
+               href="https://d.wanfangdata.com.cn/conference/CiFDb25mZXJlbmNlTmV3U29scjlTMjAyNjA5MTUwOTMyMzESBzkyOTI3ODcaCHhyYjZkZmdr"
+               target="_blank" rel="noopener noreferrer">基于 Cruise 软件的重型商用车循环工况法燃油消耗仿真<svg class="pub-link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3Z"/><path d="M5 5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6H5V5Z"/></svg></a>
+            <span class="en">Fuel Consumption Simulation of Heavy Commercial Vehicles under Driving Cycles Using Cruise</span>
+            <span class="pub-list-meta">中国内燃机学会2014年学术年会论文集, 2014: 140-145 · 第 1 作者<span class="sr-only">（在新窗口打开原文）</span></span>
+          </li>
+          <li>
+            <span class="pub-list-title">基于 Cruise 和 Simulink 软件对可充电式串联混动汽车经济性仿真</span>
+            <span class="en">Fuel Economy Simulation of a Rechargeable Series Hybrid Electric Vehicle Based on Cruise and Simulink</span>
+            <span class="pub-list-meta">《2011 年 AVL 用户大会论文集》2011.09 · 第 3 作者</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="pub-panel" id="reports" role="tabpanel" aria-labelledby="pub-tab-reports" tabindex="0">
+        <h3 class="sub-h">经验报告（12 篇）<span class="h2-en">Reports</span></h3>
+
+        <div class="lead">
+          <p>12 篇经验报告，均为第 1 作者，覆盖仿真方法、数据处理算法与整车工程分析，沉淀为可复用的工具链与方法论。</p>
+        </div>
+
+        <ul class="report-grid">
+          <li>
+            <span class="report-no">01</span>
+            <span class="report-name">AVL CRUISE 软件与 MATLAB 软件的联合仿真方法</span>
+            <span class="report-date">2015.05</span>
+          </li>
+          <li>
+            <span class="report-no">02</span>
+            <span class="report-name">基于公路设计规范的车辆道路坡度适应性评价方法</span>
+            <span class="report-date">2015.07</span>
+          </li>
+          <li>
+            <span class="report-no">03</span>
+            <span class="report-name">由轮胎型号计算轮胎滚动半径的方法</span>
+            <span class="report-date">2015.08</span>
+          </li>
+          <li>
+            <span class="report-no">04</span>
+            <span class="report-name">发动机工况点与整车工况及百公里油耗的相关性分析</span>
+            <span class="report-date">2017.04</span>
+          </li>
+          <li>
+            <span class="report-no">05</span>
+            <span class="report-name">迎面风对车辆性能的影响</span>
+            <span class="report-date">2017.10</span>
+          </li>
+          <li>
+            <span class="report-no">06</span>
+            <span class="report-name">用采集的数据绘制油门特性图的方法</span>
+            <span class="report-date">2018.09</span>
+          </li>
+          <li>
+            <span class="report-no">07</span>
+            <span class="report-name">利用总线车速数据修正 GPS 车速的算法</span>
+            <span class="report-date">2019.04</span>
+          </li>
+          <li>
+            <span class="report-no">08</span>
+            <span class="report-name">加速功率计算的计算方法</span>
+            <span class="report-date">2019.06</span>
+          </li>
+          <li>
+            <span class="report-no">09</span>
+            <span class="report-name">考虑特征里程分配比例的 C-WTVC 工况 DutyCycle 分析方法</span>
+            <span class="report-date">2020.03</span>
+          </li>
+          <li>
+            <span class="report-no">10</span>
+            <span class="report-name">发动机运行工况分布做功气泡图分析方法（用于发动机 Fuel Map 优化）</span>
+            <span class="report-date">2020.05</span>
+          </li>
+          <li>
+            <span class="report-no">11</span>
+            <span class="report-name">排放热管理对整车油耗影响程度的仿真分析方法</span>
+            <span class="report-date">2024.07</span>
+          </li>
+          <li>
+            <span class="report-no">12</span>
+            <span class="report-name">整车滑行阻力分解分析方法</span>
+            <span class="report-date">2024.09</span>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="section" id="honors">
@@ -974,33 +1157,28 @@
           <span class="en">Team Lead, Lingtan Multi-Agent System for Vehicle Power Performance &amp; Energy Economy · 2nd Prize (Insight Award)</span>
         </li>
         <li>
-          <strong>[A2]</strong> <strong>F2.8 48V(P0) 混合动力轻卡仿真能力建设</strong>
-          <span class="award-date">2020.12</span>
-          <br /><span class="award-org">第 1 负责人 · 公司优秀党员攻关项目</span>
-          <span class="en">Lead, Hybrid Simulation Capability Development (F2.8 + 48V P0) · Outstanding Party Member Project</span>
-        </li>
-        <li>
-          <strong>[A3]</strong> <strong>四阶段油耗项目</strong>
+          <strong>[A2]</strong> <strong>四阶段油耗项目</strong>
           <span class="award-date">2021.05</span>
           <br /><span class="award-org">仿真负责人 · 部门最佳交付奖</span>
           <span class="en">Simulation Lead, Phase-4 Fuel Consumption Program · Best Delivery Award</span>
         </li>
         <li>
-          <strong>[A4]</strong> <strong>车辆性能集成数字化系统</strong>
+          <strong>[A3]</strong> <strong>F2.5（TH21 混动专用发动机）强混预研</strong>
+          <span class="award-date">2021.01</span>
+          <br /><span class="award-org">仿真负责人 · P2 构型混合动力仿真能力建设</span>
+          <span class="en">Simulation Lead, F2.5 (TH21 Dedicated Hybrid Engine) Strong-Hybrid Pre-Study · P2 Hybrid Simulation Capability Development</span>
+        </li>
+        <li>
+          <strong>[A4]</strong> <strong>F2.8 48V(P0) 混合动力轻卡仿真能力建设</strong>
+          <span class="award-date">2020.12</span>
+          <br /><span class="award-org">第 1 负责人 · 公司优秀党员攻关项目</span>
+          <span class="en">Lead, Hybrid Simulation Capability Development (F2.8 + 48V P0) · Outstanding Party Member Project</span>
+        </li>
+        <li>
+          <strong>[A5]</strong> <strong>车辆性能集成数字化系统</strong>
           <span class="award-date">2016.03</span>
           <br /><span class="award-org">第 1 负责人 · 第二届“福康杯”创新案例大赛二等奖</span>
           <span class="en">Lead, Digital Vehicle Performance Integration System · 2nd Prize, Innovation Case Contest</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="section" id="education">
-      <h2>教育背景 <span class="h2-en">Education</span></h2>
-      <ul class="edu">
-        <li>
-          <em>2002.09 - 2006.07</em>，哈尔滨工业大学（威海），机械设计制造及其自动化，本科 · 工学学士。
-          <span class="en">Sep 2002 – Jul 2006 · Harbin Institute of Technology, Weihai · Mechanical Design, Manufacturing and Automation · B.Eng.</span>
-          <span class="en">相关课程：自动控制原理、机械系统设计、计算机编程基础</span>
         </li>
       </ul>
     </section>
@@ -1012,10 +1190,85 @@
   </main>
 </div>
 
+<!-- ================= 二维码弹层（微信 / 抖音共用） ================= -->
+<dialog class="qr-modal" id="qrModal" tabindex="-1" aria-labelledby="qrTitle">
+  <div class="qr-head">
+    <p class="qr-title" id="qrTitle">扫码添加</p>
+    <button class="qr-close" id="qrClose" type="button" aria-label="关闭二维码">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <img class="qr-image" id="qrImage" src="img/wechat-qr.png" alt="微信二维码，扫码添加好友"
+       loading="lazy" decoding="async" />
+</dialog>
+
 <script>
 (function () {
   var doc = document.documentElement;
   doc.classList.add('js');
+
+  /* ---------- 深浅色主题切换 ---------- */
+  var themeToggle = document.getElementById('themeToggle');
+  var mqDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function readSavedTheme() {
+    try { return localStorage.getItem('theme'); } catch (e) { return null; }
+  }
+  function syncThemeToggle() {
+    if (!themeToggle) return;
+    var isDark = doc.getAttribute('data-theme') === 'dark';
+    var label = isDark ? '切换到浅色主题' : '切换到深色主题';
+    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    themeToggle.setAttribute('aria-label', label);
+    themeToggle.setAttribute('title', label);
+  }
+  function applyTheme(theme, persist) {
+    doc.setAttribute('data-theme', theme);
+    if (persist) {
+      try { localStorage.setItem('theme', theme); } catch (e) {}
+    }
+    syncThemeToggle();
+  }
+  syncThemeToggle();
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      applyTheme(doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+    });
+  }
+  /* 用户未手动选择过主题时，跟随操作系统设置变化 */
+  if (mqDark) {
+    var onSchemeChange = function (e) {
+      if (!readSavedTheme()) applyTheme(e.matches ? 'dark' : 'light', false);
+    };
+    if (mqDark.addEventListener) mqDark.addEventListener('change', onSchemeChange);
+    else if (mqDark.addListener) mqDark.addListener(onSchemeChange);
+  }
+
+  /* ---------- 二维码弹层（微信 / 抖音共用） ---------- */
+  var qrModal = document.getElementById('qrModal');
+  var qrImage = document.getElementById('qrImage');
+  var qrTitle = document.getElementById('qrTitle');
+  var qrClose = document.getElementById('qrClose');
+  var qrTriggers = document.querySelectorAll('[data-qr]');
+  if (qrModal && qrImage && qrTriggers.length && typeof qrModal.showModal === 'function') {
+    [].forEach.call(qrTriggers, function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        qrImage.src = a.getAttribute('data-qr');
+        qrImage.alt = a.getAttribute('data-alt') || '';
+        if (qrTitle) qrTitle.textContent = a.getAttribute('data-title') || '扫码添加';
+        qrModal.showModal();
+        /* 焦点落在弹层容器，避免一打开就给关闭按钮套上焦点环 */
+        qrModal.focus();
+      });
+    });
+    if (qrClose) {
+      qrClose.addEventListener('click', function () { qrModal.close(); });
+    }
+    /* 点击遮罩区域关闭 */
+    qrModal.addEventListener('click', function (e) {
+      if (e.target === qrModal) qrModal.close();
+    });
+  }
 
   /* ---------- 顶部滚动进度条 ---------- */
   var bar = document.getElementById('scrollProgress');
@@ -1056,7 +1309,7 @@
   /* ---------- 滚动淡入 ---------- */
   var candidates = document.querySelectorAll(
     '.hero, .section h2, .sub-h, .lead, .quote, .checks li, .table-wrap, ' +
-    '.flow, .skill-list, .tag-group, .pub-list li, .awards li, .edu li, ' +
+    '.flow, .skill-list, .tag-group, .pub-list li, .report-grid li, .awards li, .edu li, ' +
     '.anchor-chips, .part-head, .proj-meta, .award-callout, .bridge'
   );
   if ('IntersectionObserver' in window) {
@@ -1137,7 +1390,7 @@
     });
 
     if (hashSync) {
-      var syncFromHash = function () {
+      var syncFromHash = function (scrollToTarget) {
         var hash = window.location.hash;
         if (!hash || hash.length < 2) return;
         var target;
@@ -1146,15 +1399,25 @@
         var panel = target.closest(panelSelector);
         if (!panel) return;
         var tab = tabs.querySelector('[aria-controls="' + panel.id + '"]');
-        if (tab) activate(tab, false, true, false);
+        if (!tab) return;
+        activate(tab, false, true, false);
+        /* 首次加载时面板会被收起，锚点位置会失效，这里重新对齐；
+           若链接直接指向面板本身（如 #reports），则回到选项卡栏，便于看到当前选中项 */
+        if (scrollToTarget) {
+          var scrollTarget = (target.id && target.id === panel.id) ? tabs : target;
+          requestAnimationFrame(function () {
+            scrollTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+          });
+        }
       };
-      syncFromHash();
-      window.addEventListener('hashchange', syncFromHash);
+      syncFromHash(true);
+      window.addEventListener('hashchange', function () { syncFromHash(false); });
     }
   }
 
   initSegTabs('.exp-tabs', '.exp-panel', '.exp-tabs-wrap', { stickyScroll: true, hashSync: true });
   initSegTabs('.skill-tabs', '.skill-panel', null, { hashSync: false });
+  initSegTabs('.pub-tabs', '.pub-panel', '.pub-tabs-wrap', { hashSync: true });
 
   paintProgress();
   paintSpy();
