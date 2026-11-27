@@ -1370,13 +1370,15 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 .skill-tab[aria-selected="true"] .skill-tab-meta,
 .pub-tab[aria-selected="true"] .pub-tab-meta { color: var(--accent-strong); }
 
-/* 论文 / 经验报告选项卡的图标（专利用彩色小图，其余用单色 SVG 跟随主题） */
+/* 选项卡图标（专利用彩色小图，其余用单色 SVG 跟随主题） */
+.skill-tab-main,
 .pub-tab-main {
   display: flex;
   align-items: center;
   gap: 7px;
   min-width: 0;
 }
+.skill-tab-ico,
 .pub-tab-logo,
 .pub-tab-ico {
   flex: none;
@@ -1386,8 +1388,10 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   opacity: .85;
   transition: opacity .18s var(--ease);
 }
+.skill-tab-ico { fill: currentColor; }
 .pub-tab-logo-ip { width: 19px; height: auto; }
 .pub-tab-ico { fill: currentColor; }
+.skill-tab[aria-selected="true"] .skill-tab-ico,
 .pub-tab[aria-selected="true"] .pub-tab-logo,
 .pub-tab[aria-selected="true"] .pub-tab-ico { opacity: 1; }
 :root[data-theme="dark"] .pub-tab-logo-ip { filter: brightness(0) invert(1); }
