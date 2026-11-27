@@ -437,34 +437,6 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 .side-contact .social-icons a { white-space: nowrap; }
 .side-block .side-bio { margin: 0; }
 
-/* 合并进「专业技能」的工具链小标题与标签 */
-.side-tool-label {
-  margin: 10px 0 6px;
-  padding-top: 9px;
-  border-top: 1px dashed var(--border);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--text-4);
-}
-.side-tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.side-tag-list li {
-  padding: 2px 8px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  font-size: 11px;
-  line-height: 1.5;
-  color: var(--text-2);
-}
-
 /* 获奖荣誉 */
 .side-awards {
   margin: 0;
@@ -2086,7 +2058,6 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .side-bio li { padding: 1px 0 1px 12px; }
   .side-bio li::before { top: 8px; }
   .social-icons { padding-top: 12px; gap: 4px; }
-  .side-tag-list { gap: 4px; }
   .side-awards li { padding: 3px 0; font-size: 10.5px; }
 }
 
@@ -2133,7 +2104,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .avatar::after { inset: 26px; }
   .side-name { font-size: 18px; }
   .side-role { margin-bottom: 14px; }
-  /* 小屏：专业技能（含工具链）/ 获奖荣誉与主区重复，省略；只留联系方式 */
+  /* 小屏：专业技能 / 获奖荣誉与主区重复，省略；只留联系方式 */
   .side-skills, .side-honors { display: none; }
   .side-meta {
     max-width: 420px;
@@ -2368,8 +2339,8 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   }
   .avatar, .side-role .en, .social-icons .ico { display: none; }
   .side-bio { margin-bottom: 8px; }
-  /* 工具链与获奖荣誉在正文已有，打印时省略 */
-  .side-honors, .side-tool-label, .side-tag-list { display: none; }
+  /* 获奖荣誉在正文已有，打印时省略 */
+  .side-honors { display: none; }
   .side-bio .en { color: #333; }
   /* 侧栏区块标题转黑白，避免彩色图标与过浅的分隔线 */
   .side-h { color: #000; border-bottom-color: #999; }
