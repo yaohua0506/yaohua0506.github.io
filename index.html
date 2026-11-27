@@ -720,24 +720,40 @@
         <div class="pub-tabs" role="tablist" aria-label="专利、论文与经验报告">
           <button type="button" class="pub-tab" role="tab" id="pub-tab-patents"
                   aria-selected="true" aria-controls="patents">
-            <span class="pub-tab-name">专利</span>
+            <span class="pub-tab-main">
+              <img class="pub-tab-logo pub-tab-logo-ip" src="img/IP.png"
+                   alt="" aria-hidden="true" width="19" height="15" />
+              <span class="pub-tab-name">专利</span>
+            </span>
             <span class="pub-tab-meta">13 项</span>
           </button>
           <button type="button" class="pub-tab" role="tab" id="pub-tab-papers"
                   aria-selected="false" aria-controls="papers" tabindex="-1">
-            <span class="pub-tab-name">论文</span>
+            <span class="pub-tab-main">
+              <svg class="pub-tab-ico" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M11 7.6C9.6 6.2 7.6 5.4 5.3 5.4H2a1 1 0 0 0-1 1v11.5a1 1 0 0 0 1 1h3.3c1.7 0 3.3.6 4.6 1.6.6.4 1.1.1 1.1-.5V8.2c0-.2 0-.4 0-.6Z"/>
+                <path d="M13 7.6c1.4-1.4 3.4-2.2 5.7-2.2H22a1 1 0 0 1 1 1v11.5a1 1 0 0 1-1 1h-3.3c-1.7 0-3.3.6-4.6 1.6-.6.4-1.1.1-1.1-.5V8.2c0-.2 0-.4 0-.6Z"/>
+              </svg>
+              <span class="pub-tab-name">论文</span>
+            </span>
             <span class="pub-tab-meta">3 篇</span>
           </button>
           <button type="button" class="pub-tab" role="tab" id="pub-tab-reports"
                   aria-selected="false" aria-controls="reports" tabindex="-1">
-            <span class="pub-tab-name">经验报告</span>
+            <span class="pub-tab-main">
+              <svg class="pub-tab-ico" viewBox="0 0 24 24" fill-rule="evenodd" aria-hidden="true">
+                <path d="M7 2h7.6c.5 0 1 .2 1.4.6l4.4 4.4c.4.4.6.9.6 1.4V20a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 2.2V7a1 1 0 0 0 1 1h2.8L15 4.2ZM8.5 17.5H10v-4H8.5v4Zm2.7 0H13v-7h-1.8v7Zm2.7 0H15.5v-2.6H13.9v2.6Z"/>
+              </svg>
+              <span class="pub-tab-name">经验报告</span>
+            </span>
             <span class="pub-tab-meta">12 篇</span>
           </button>
         </div>
       </div>
 
       <div class="pub-panel" id="patents" role="tabpanel" aria-labelledby="pub-tab-patents" tabindex="0">
-        <h3 class="sub-h">专利<span class="h2-en">Patents</span></h3>
+        <h3 class="sub-h"><img class="sub-h-ico sub-h-ico-ip" src="img/IP.png"
+            alt="" aria-hidden="true" width="21" height="17" />专利<span class="h2-en">Patents</span></h3>
         <p class="pub-note">13 项 —— 8 项发明专利、5 项实用新型，其中 6 项已授权；标题可点击查看原文。</p>
 
         <ul class="pub-cards">
@@ -901,7 +917,10 @@
       </div>
 
       <div class="pub-panel" id="papers" role="tabpanel" aria-labelledby="pub-tab-papers" tabindex="0">
-        <h3 class="sub-h">论文<span class="h2-en">Papers</span></h3>
+        <h3 class="sub-h"><svg class="sub-h-ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 7.6C9.6 6.2 7.6 5.4 5.3 5.4H2a1 1 0 0 0-1 1v11.5a1 1 0 0 0 1 1h3.3c1.7 0 3.3.6 4.6 1.6.6.4 1.1.1 1.1-.5V8.2c0-.2 0-.4 0-.6Z"/>
+          <path d="M13 7.6c1.4-1.4 3.4-2.2 5.7-2.2H22a1 1 0 0 1 1 1v11.5a1 1 0 0 1-1 1h-3.3c-1.7 0-3.3.6-4.6 1.6-.6.4-1.1.1-1.1-.5V8.2c0-.2 0-.4 0-.6Z"/>
+        </svg>论文<span class="h2-en">Papers</span></h3>
         <p class="pub-note">3 篇 —— 围绕 Cruise / Simulink 联合仿真的混动与商用车油耗研究，前 2 篇可查看原文。</p>
 
         <ul class="pub-cards">
@@ -942,7 +961,9 @@
       </div>
 
       <div class="pub-panel" id="reports" role="tabpanel" aria-labelledby="pub-tab-reports" tabindex="0">
-        <h3 class="sub-h">经验报告<span class="h2-en">Reports</span></h3>
+        <h3 class="sub-h"><svg class="sub-h-ico" viewBox="0 0 24 24" fill-rule="evenodd" aria-hidden="true">
+          <path d="M7 2h7.6c.5 0 1 .2 1.4.6l4.4 4.4c.4.4.6.9.6 1.4V20a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 2.2V7a1 1 0 0 0 1 1h2.8L15 4.2ZM8.5 17.5H10v-4H8.5v4Zm2.7 0H13v-7h-1.8v7Zm2.7 0H15.5v-2.6H13.9v2.6Z"/>
+        </svg>经验报告<span class="h2-en">Reports</span></h3>
         <p class="pub-note">12 篇 —— 均为第 1 作者，覆盖仿真方法、数据处理算法与整车工程分析，沉淀为可复用的工具链与方法论。</p>
 
         <ul class="pub-cards">

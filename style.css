@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    个人简历 · 专业编辑风（蓝色强调）
    顶部导航吸顶 + 左侧固定信息栏 + 右侧内容滚动
    纯 CSS + 内联 SVG，无任何外部请求
@@ -840,6 +840,18 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   background: var(--accent-strong);
 }
 .sub-h:first-of-type { margin-top: 0; }
+/* 标题前图标（专利 / 论文 / 经验报告） */
+.sub-h-ico {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-right: -2px;
+  object-fit: contain;
+  fill: currentColor;
+  opacity: .9;
+}
+.sub-h-ico-ip { width: 21px; height: auto; }
+:root[data-theme="dark"] .sub-h-ico-ip { filter: brightness(0) invert(1); }
 
 .section > p {
   margin: 0 0 14px;
@@ -1357,6 +1369,28 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 .exp-tab[aria-selected="true"] .exp-tab-meta,
 .skill-tab[aria-selected="true"] .skill-tab-meta,
 .pub-tab[aria-selected="true"] .pub-tab-meta { color: var(--accent-strong); }
+
+/* 论文 / 经验报告选项卡的图标（专利用彩色小图，其余用单色 SVG 跟随主题） */
+.pub-tab-main {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.pub-tab-logo,
+.pub-tab-ico {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  opacity: .85;
+  transition: opacity .18s var(--ease);
+}
+.pub-tab-logo-ip { width: 19px; height: auto; }
+.pub-tab-ico { fill: currentColor; }
+.pub-tab[aria-selected="true"] .pub-tab-logo,
+.pub-tab[aria-selected="true"] .pub-tab-ico { opacity: 1; }
+:root[data-theme="dark"] .pub-tab-logo-ip { filter: brightness(0) invert(1); }
 
 .exp-panel[hidden],
 .skill-panel[hidden],
@@ -2415,6 +2449,11 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
     opacity: .9;
     filter: none;
   }
+  /* 深色下专利图标反白；打印到白纸必须还原为彩色，否则会消失 */
+  .sub-h-ico-ip,
+  .pub-tab-logo-ip,
+  :root[data-theme="dark"] .sub-h-ico-ip,
+  :root[data-theme="dark"] .pub-tab-logo-ip { filter: none; }
   .exp-stack { border-top: 0; padding-top: 4px; }
 
   .anchor-chips { display: none; }
@@ -2476,3 +2515,5 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .exp, .table-wrap, .flow, .awards li, .pub-cards li,
   .skill-list li, .tag-group, .proj-meta, .award-callout, .bridge { page-break-inside: avoid; }
 }
+
+
