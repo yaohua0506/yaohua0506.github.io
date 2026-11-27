@@ -1849,7 +1849,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
 .award-body { min-width: 0; }
 .award-thumb {
   display: block;
-  height: 104px;               /* 透明竖版奖杯，宽度按图比例约 39px */
+  height: 84px;                /* 透明竖版奖杯，宽度按图比例约 31px */
   border: 0;
   border-radius: 6px;
   background: none;
@@ -1870,7 +1870,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
 
 /* 横版缩略图（项目路线图）：文档预览式细边，不做上浮 */
 .award-thumb--wide {
-  width: 176px;
+  width: 132px;
   height: auto;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -2286,7 +2286,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .pub-tab { padding: 8px 8px; }
   .section h2 { font-size: 19px; gap: 8px; }
   .h2-en { font-size: 11px; }
-  .award-thumb:not(.award-thumb--wide) { height: 80px; }
+  .award-thumb:not(.award-thumb--wide) { height: 64px; }
 }
 
 /* ============================================================
