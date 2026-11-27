@@ -321,9 +321,10 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
 
 .side-role {
   margin: 0 0 18px;
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 600;
   line-height: 1.5;
+  white-space: nowrap;   /* 中文主标题保持单行，不折成两行 */
   color: var(--text-2);
 }
 .side-role .en {
@@ -332,6 +333,7 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   font-size: 10.5px;
   font-weight: 400;
   letter-spacing: .04em;
+  white-space: normal;   /* 英文副标题仍可正常换行，避免溢出侧栏 */
   text-wrap: balance;
   color: var(--text-3);
 }
@@ -675,6 +677,7 @@ em { font-style: normal; font-weight: 600; color: var(--text-2); }
   margin: 0 0 10px;
   font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;   /* 主标题保持单行 */
   color: var(--text-2);
 }
 
@@ -2065,6 +2068,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
 @media (max-width: 1140px) {
   :root { --side-w: 276px; }
   .content { padding: 40px 38px 64px; }
+  .side-role { font-size: 10.5px; }   /* 侧栏变窄，缩字号保证单行 */
 }
 
 @media (max-width: 900px) {
@@ -2091,6 +2095,8 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
+
+  .side-role { font-size: 12.5px; }   /* 单列布局恢复字号 */
 
   .avatar {
     width: 112px;
@@ -2276,6 +2282,7 @@ a.pub-title:focus-visible .pub-link-icon { opacity: 1; }
   .sidebar { padding: 24px 16px 18px; }
   .hero { padding: 20px 16px 20px; }
   .hero-name { font-size: 27px; }
+  .hero-title { font-size: clamp(12.5px, 3.9vw, 15px); }   /* 小屏缩字号，保证主标题单行不溢出 */
   .hero-stats { grid-template-columns: 1fr; }
   .exp { padding: 18px 15px 20px; }
   .exp-tab { flex-basis: 156px; padding: 8px 10px; }
